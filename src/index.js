@@ -21,7 +21,10 @@ input.addEventListener('keyup', debounce(onInput, DEBOUNCE_DELAY) )
 
 function onInput(evt) {
     evt.preventDefault()
-    const name = input.value.trim()
+    const name = input.value
+    if (!name) {
+        return
+    }
     console.log(getCountry(name).then(data => capital(data)))
    
 }   
