@@ -14,4 +14,4 @@ const fetchCountries = name => {
     return resp.json();
   });
 };
-export { fetchCountries };
+export { fetchCountries, countryInfo, countryList };

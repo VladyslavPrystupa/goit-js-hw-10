@@ -1,12 +1,10 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
-import { fetchCountries } from './fetchCountries';
+import { fetchCountries, countryInfo, countryList } from './fetchCountries';
 
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
 const input = document.querySelector('#search-box');
-const countryInfo = document.querySelector('.country-info');
-const countryList = document.querySelector('.country-list');
 
 input.addEventListener('keyup', debounce(onInput, DEBOUNCE_DELAY));
 
@@ -21,13 +19,10 @@ function onInput(evt) {
   }
   fetchCountries(name)
     .then(data => murkupCountry(data))
-    .catch(err => {
-      throw new Error(err.statusText);
-    });
+    .catch(err => console.log(err));
 }
 
 function murkupCountry(arr) {
-  // console.log(arr.length);
   if (arr.length === 1) {
     countryList.innerHTML = '';
     return (countryInfo.innerHTML = arr
@@ -65,13 +60,15 @@ function murkupCountry(arr) {
   }
 }
 
-// function fetchCountries(name) {
+// const fetchCountries = name => {
 //   return fetch(
 //     `https://restcountries.com/v3.1/name/${name}?fields=capital,population,languages,name,flags`
 //   ).then(resp => {
 //     if (!resp.ok) {
 //       Notiflix.Notify.failure('Oops, there is no country with that name');
+//       countryInfo.innerHTML = '';
+//       countryList.innerHTML = '';
 //     }
 //     return resp.json();
 //   });
-// }
+// };
