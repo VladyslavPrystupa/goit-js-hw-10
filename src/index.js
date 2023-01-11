@@ -45,7 +45,7 @@ function oneCountry(country) {
         capital,
         population,
         languages,
-      }) => `<ul>
+      }) => `<ul class="country-info-list">
     <li><h2>
         <img src="${svg}" alt="flag" width="50" height="30" />
         ${official}</h2></li>

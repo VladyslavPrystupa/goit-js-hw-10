@@ -34,3 +34,13 @@ h2{
   display: flex;
   align-items: center;
 }
+.country-list{
+    font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+}
+
+.country-info{
+  display: flex;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+}
