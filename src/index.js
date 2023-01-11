@@ -1,16 +1,18 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
-import { fetchCountries, countryInfo, countryList } from './fetchCountries';
+import { fetchCountries } from './fetchCountries';
 
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
 const input = document.querySelector('#search-box');
+const countryInfo = document.querySelector('.country-info');
+const countryList = document.querySelector('.country-list');
 
 input.addEventListener('keyup', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(evt) {
   evt.preventDefault();
-  const name = evt.target.value.trim();
+  const name = input.value.trim();
 
   if (!name) {
     countryInfo.innerHTML = '';
@@ -22,18 +24,28 @@ function onInput(evt) {
     .catch(err => console.log(err));
 }
 
-function murkupCountry(arr) {
-  if (arr.length === 1) {
+function murkupCountry(countries) {
+  if (countries.length === 1) {
     countryList.innerHTML = '';
-    return (countryInfo.innerHTML = arr
-      .map(
-        ({
-          flags: { svg },
-          name: { official },
-          capital,
-          population,
-          languages,
-        }) => `<ul>
+    oneCountry(countries);
+  } else if (countries.length > 1 && countries.length < 11) {
+    countryInfo.innerHTML = '';
+    listOfCountries(countries);
+  } else if (countries.length > 10) {
+    manyMatch();
+  }
+}
+
+function oneCountry(country) {
+  return (countryInfo.innerHTML = country
+    .map(
+      ({
+        flags: { svg },
+        name: { official },
+        capital,
+        population,
+        languages,
+      }) => `<ul>
     <li><h2>
         <img src="${svg}" alt="flag" width="50" height="30" />
         ${official}</h2></li>
@@ -41,23 +53,25 @@ function murkupCountry(arr) {
     <li><h3>Population: ${population}</h3></li>
     <li><h3>Languages: ${Object.values(languages)}</h3></li>
     </ul>`
-      )
-      .join(''));
-  } else if (arr.length > 1 && arr.length < 11) {
-    countryInfo.innerHTML = '';
-    return (countryList.innerHTML = arr
-      .map(
-        ({ flags: { svg }, name: { common } }) => `<ul>
+    )
+    .join(''));
+}
+
+function listOfCountries(list) {
+  return (countryList.innerHTML = list
+    .map(
+      ({ flags: { svg }, name: { common } }) => `<ul>
         <li><h2>
         <img src="${svg}" alt="flag" width="50" height="30" />
         ${common}</h2></li>`
-      )
-      .join(''));
-  } else if (arr.length > 10) {
-    Notiflix.Notify.info(
-      'Too many matches found. Please enter a more specific name.'
-    );
-  }
+    )
+    .join(''));
+}
+
+function manyMatch() {
+  return Notiflix.Notify.info(
+    'Too many matches found. Please enter a more specific name.'
+  );
 }
 
 // const fetchCountries = name => {
