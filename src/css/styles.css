@@ -15,8 +15,13 @@ body {
 #search-box {
   font: inherit;
   padding: 8px;
-  max-width: 320px;
+  max-width: 300px;
   margin-bottom: 16px;
+  border: 2px solid #212121;
+  border-radius: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+
 }
 
 ul{
@@ -61,6 +66,7 @@ h2{
 
 #search-box:focus{
 background-color: lightblue;
+
 }
 
 .country-info-list {
@@ -69,18 +75,3 @@ background-color: lightblue;
   padding: 15px;
 }
 
-
-.country-name{
-  
-}
-
-.country-capital-name{
-
-}
-
-.country-population{
-
-}
-.country-languaes{
-
-}
