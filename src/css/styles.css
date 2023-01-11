@@ -41,19 +41,17 @@ h2{
   flex-direction: column;
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
-  gap: 8px;
-  
- 
-  
+  gap: 8px; 
+  width: 300px;
 }
 
-/* .country-list-li{
-  display: flex;
+.country-list-li{
+
   border: 2px solid #212121;
   border-radius: 25px;
   padding: 10px;
-  min-width: 300px;
-} */
+  
+}
 
 .country-info{
   display: flex;
