@@ -31,16 +31,58 @@ img{
 }
 
 h2{
+  margin: 0;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 .country-list{
-    font-family: 'Courier New', Courier, monospace;
-      font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  gap: 8px;
+  
+ 
+  
 }
+
+/* .country-list-li{
+  display: flex;
+  border: 2px solid #212121;
+  border-radius: 25px;
+  padding: 10px;
+  min-width: 300px;
+} */
 
 .country-info{
   display: flex;
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
+}
+
+#search-box:focus{
+background-color: lightblue;
+}
+
+.country-info-list {
+  border: 2px solid #212121;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+
+.country-name{
+  
+}
+
+.country-capital-name{
+
+}
+
+.country-population{
+
+}
+.country-languaes{
+
 }

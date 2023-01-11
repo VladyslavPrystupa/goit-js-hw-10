@@ -32,6 +32,8 @@ function murkupCountry(countries) {
     countryInfo.innerHTML = '';
     listOfCountries(countries);
   } else if (countries.length > 10) {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
     manyMatch();
   }
 }
@@ -60,10 +62,11 @@ function oneCountry(country) {
 function listOfCountries(list) {
   return (countryList.innerHTML = list
     .map(
-      ({ flags: { svg }, name: { common } }) => `<ul>
-        <li><h2>
+      ({ flags: { svg }, name: { common } }) => `<li class="country-list-li">
+        <h2>
         <img src="${svg}" alt="flag" width="50" height="30" />
-        ${common}</h2></li>`
+        ${common}</h2>
+        </li>`
     )
     .join(''));
 }
