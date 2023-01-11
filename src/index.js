@@ -1,4 +1,6 @@
 import './css/styles.css';
+import Notiflix from 'notiflix';
+import { fetchCountries } from './fetchCountries';
 
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
@@ -17,22 +19,15 @@ function onInput(evt) {
     countryList.innerHTML = '';
     return;
   }
-  getCountry(name).then(data => murkupCountry(data));
-}
-
-function getCountry(name) {
-  return fetch(
-    `https://restcountries.com/v3.1/name/${name}?fields=capital,population,languages,name,flags`
-  ).then(resp => {
-    if (!resp.ok) {
-      throw new Error(123);
-    }
-    return resp.json();
-  });
+  fetchCountries(name)
+    .then(data => murkupCountry(data))
+    .catch(err => {
+      throw new Error(err.statusText);
+    });
 }
 
 function murkupCountry(arr) {
-  console.log(arr.length);
+  // console.log(arr.length);
   if (arr.length === 1) {
     countryList.innerHTML = '';
     return (countryInfo.innerHTML = arr
@@ -63,5 +58,20 @@ function murkupCountry(arr) {
         ${common}</h2></li>`
       )
       .join(''));
+  } else if (arr.length > 10) {
+    Notiflix.Notify.info(
+      'Too many matches found. Please enter a more specific name.'
+    );
   }
 }
+
+// function fetchCountries(name) {
+//   return fetch(
+//     `https://restcountries.com/v3.1/name/${name}?fields=capital,population,languages,name,flags`
+//   ).then(resp => {
+//     if (!resp.ok) {
+//       Notiflix.Notify.failure('Oops, there is no country with that name');
+//     }
+//     return resp.json();
+//   });
+// }
