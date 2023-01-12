@@ -12,9 +12,9 @@ input.addEventListener('keyup', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(evt) {
   evt.preventDefault();
-  const name = input.value;
+  const name = input.value.trim();
   if (!name) {
-    clear();
+    clear(); /*заливив умову, бо якшо швидко очцщуєш інпут, розмітка збергається */
     return;
   }
   fetchCountries(name)
