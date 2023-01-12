@@ -12,28 +12,27 @@ input.addEventListener('keyup', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(evt) {
   evt.preventDefault();
-  const name = input.value.trim();
-
+  const name = input.value;
   if (!name) {
-    countryInfo.innerHTML = '';
-    countryList.innerHTML = '';
+    clear();
     return;
   }
   fetchCountries(name)
     .then(data => murkupCountry(data))
-    .catch(err => console.log(err));
+    .catch(err => clear());
 }
 
 function murkupCountry(countries) {
   if (countries.length === 1) {
     countryList.innerHTML = '';
     oneCountry(countries);
-  } else if (countries.length > 1 && countries.length < 11) {
+  }
+  if (countries.length > 1 && countries.length < 11) {
     countryInfo.innerHTML = '';
     listOfCountries(countries);
-  } else if (countries.length > 10) {
-    countryList.innerHTML = '';
-    countryInfo.innerHTML = '';
+  }
+  if (countries.length > 10) {
+    clear();
     manyMatch();
   }
 }
@@ -75,6 +74,11 @@ function manyMatch() {
   return Notiflix.Notify.info(
     'Too many matches found. Please enter a more specific name.'
   );
+}
+
+function clear() {
+  countryList.innerHTML = '';
+  countryInfo.innerHTML = '';
 }
 
 // const fetchCountries = name => {
